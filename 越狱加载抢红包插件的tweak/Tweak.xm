@@ -2,7 +2,7 @@
 
 %ctor {
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    NSString *libraryPath = @"/Library/Application Support/DingDing/libDingTalkNoJailTweak.a";
+    NSString *libraryPath = @"/Library/Application Support/DingDing/libDingTalkNoJailTweak.dylib";
         
       
             if ([[NSFileManager defaultManager] fileExistsAtPath:libraryPath]){
