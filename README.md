@@ -14,7 +14,7 @@
 对于电脑上安装了theos环境的来说.更改目录下makefile文件中的THEOS_DEVICE_IP = 10.0.45.93为你自己的手机的ip.  
 然后执行命令 make package install,就可以将其安装到越狱的手机上.一旦安装了,打开钉钉,会出现一个菜单  
 
-![](image/IMG_5282.PNG)  
+![](image/IMG_5282.jpg)  
 
 点击菜单,就出现了自动抢红包的控制开关了  
 
