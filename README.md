@@ -1,19 +1,25 @@
 # 源码说明
 
-## 分析工程的Tweak目录
+## 分析工程的Tweak 目录
 这个目录中的tweak,是我分析钉钉流程中使用的,作用就是将我觉得可能的类中的方法都加上Log,这样我们就可以根据log日志来分析钉钉的抢洪波啊的流程,如果你需要自己分析流程,那么这个工程适合你.对于电脑上安装了theos环境的来说.更改目录下makefile文件中的THEOS_DEVICE_IP = 10.0.45.93为你自己的手机的ip.  
 然后执行命令 make package install,就可以将其安装到越狱的手机上来进行输出日志,从而分析了.
 
 
-## DingTalkNoJailTweak.xcodeproj工程,这个用来方便的查看代码的.虽然它也可以用来生成动态链接库,但是这里我提供了一个脚本 build_dylib.sh来生成自动抢红包的逻辑的dylib.
+## DingTalkNoJailTweak.xcodeproj工程
+这个用来方便的查看代码的.虽然它也可以用来生成动态链接库,但是这里我提供了一个脚本 build_dylib.sh来生成自动抢红包的逻辑的dylib.
 
 ## 越狱加载抢红包插件的tweak 目录
-这个tweak是用来在越狱手机上加载build_dylib.sh生成的抢红包的dylib的.编译方式,同第一个.  不过要先运行build_dylib.sh生成dylib.然后将生成的 bin/univesal/libDingTalkNoJailTweak.ydlib拷贝到 越狱加载抢红包插件的tweak/layout/Library/Application Support/DingDing/目录下
+这个tweak是用来在越狱手机上加载build_dylib.sh生成的抢红包的dylib的.编译方式,同第一个.   
+ 不过要先运行build_dylib.sh生成dylib.然后将生成的 bin/univesal/libDingTalkNoJailTweak.ydlib拷贝到 越狱加载抢红包插件的tweak/layout/Library/Application Support/DingDing/目录下
 对于电脑上安装了theos环境的来说.更改目录下makefile文件中的THEOS_DEVICE_IP = 10.0.45.93为你自己的手机的ip.  
-然后执行命令 make package install,就可以将其安装到越狱的手机上.一旦安装了,打开钉钉,会出现一个菜单
-![](image/IMG_5282.PNG)
-点击菜单,就出现了自动抢红包的控制开关了
-![](image/IMG_5283.PNG)
+然后执行命令 make package install,就可以将其安装到越狱的手机上.一旦安装了,打开钉钉,会出现一个菜单  
+
+![](image/IMG_5282.PNG)  
+
+点击菜单,就出现了自动抢红包的控制开关了  
+
+![](image/IMG_5283.PNG)  
+
 打开开关,自动抢红包就起作用了
 
 
@@ -31,7 +37,7 @@
 
 5、利用optool来修改钉钉的可执行文件DingTalk  
 ```shell
-optool install -c load -p "@executable_path/TestTweak.dylib" -t Payload/WeChat.app/WeChat
+optool install -c load -p "@executable_path/libDingTalkNoJailTweak.dylib" -t DingTalk.app/DingTalk
 ```
 这里的@executable_path表示的是可执行文件所在的目录,这也就是为什么3、中将将libDingTalkNoJailTweak.dylib拷贝其解压后的钉钉的app文件夹中,和DingTalk同级目录的原因.
 
