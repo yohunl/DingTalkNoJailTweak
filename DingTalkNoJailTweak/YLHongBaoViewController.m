@@ -28,7 +28,7 @@ static NSString *const kYLHongBaoEnableNotification = @"com.yohunl.kYLHongbaoEna
       Class class = objc_getClass("DTConversationListDataSource") ;//[self class];
       //- (void)controller:(id)arg1 didChangeObject:(id)arg2 atIndex:(unsigned long long)arg3 forChangeType:(long long)arg4 newIndex:(unsigned long long)arg5;
 
-      void (^hook_block)(id<AspectInfo> aspectinfo,id controller,id didChangeObject,unsigned long long atIndex,long long forChangeType,unsigned long long newIndex) = ^(id<AspectInfo> aspectinfo,id controller,id didChangeObject,unsigned long long atIndex,long long forChangeType,unsigned long long newIndex){
+      void (^hook_block)(id<AspectInfo> aspectinfo,id controller,id didChangeObject) = ^(id<AspectInfo> aspectinfo,id controller,id didChangeObject){
         if (![YLHongBaoViewController isEnabled]) {
           NSLog(@" 红包分析 走原来的逻辑");
           return;
