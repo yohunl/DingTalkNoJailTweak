@@ -1,0 +1,9 @@
+Package: com.yohunl.dingtalkTweak
+Name: DingTalkTweak
+Depends: mobilesubstrate
+Version: 0.0.1
+Architecture: iphoneos-arm
+Description: An DingDing MobileSubstrate tweak!
+Maintainer: lingyohunl
+Author: lingyohunl
+Section: Tweaks
