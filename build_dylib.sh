@@ -5,7 +5,7 @@ rm -rf bin
 
 src="DingTalkNoJailTweak"
 
-BIN_NAME="libDingTalkNoJailTweak.a"
+BIN_NAME="libDingTalkNoJailTweak.dylib"
 IOS_VERSION_MIN=7.0
 
 # DEVELOPER_DIR="$(xcode-select --path)"   com.yohunlent.genyunNews
