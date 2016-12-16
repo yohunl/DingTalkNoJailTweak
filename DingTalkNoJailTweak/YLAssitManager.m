@@ -15,7 +15,7 @@ __attribute((constructor)) void injected_function(){
     
     [[NSNotificationCenter defaultCenter] addObserver:[YLAssitManager sharedManager]
                                              selector:@selector(showExplorer)
-                                                 name:UIApplicationDidBecomeActiveNotification
+                                                 name:UIApplicationDidFinishLaunchingNotification
                                                object:nil];
 }
 
