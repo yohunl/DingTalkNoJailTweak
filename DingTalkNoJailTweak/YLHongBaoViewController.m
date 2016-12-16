@@ -51,26 +51,100 @@ DingTalkConfig *gDingtalkConfig = nil;
     DTRedEnvelopServiceIMP *imp = [objc_getClass("DTRedEnvelopServiceFactory") defaultServiceIMP];
     long long sid = [obj[@"sid"] longLongValue];
     NSString *cluseId = obj[@"clusterid"];
+    NSString *congrats = obj[@"congrats"];
+    NSString *sname = obj[@"sname"];
     NSLog(@"lingdaiping_sid = %lld,cluseid = %@",sid,cluseId);
     if (cluseId.length > 0){
       
-      [imp pickRedEnvelopCluster:sid clusterId:cluseId successBlock:nil failureBlock:nil];
+      BOOL isMine = [obj[@"isMine"] boolValue];
+      BOOL canPick;
+      if (isMine && !gDingtalkConfig.pickOwnerRedEnvelop) {//不抢自己的
+        canPick = NO;
+      }
+      else {//不是自己的
+        
+        canPick = [self disposeCongratsRegula:gDingtalkConfig.regularText congrats:congrats];
+        NSLog(@"lingdaiping_canPick1 = %d",canPick);
+        if (canPick) {
+          canPick = [self disposeNameCongratsRegula:gDingtalkConfig.nameregularText name:sname];
+          NSLog(@"lingdaiping_canPick2 = %d",canPick);
+        }
+        
+        
+      }
+      if (canPick) {
+        CGFloat delatyTIme = gDingtalkConfig.delayTime;
+        NSLog(@"lingdaiping_delatyTIme = %f",delatyTIme);
+        if (delatyTIme > 0) {
+          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delatyTIme * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [imp pickRedEnvelopCluster:sid clusterId:cluseId successBlock:nil failureBlock:nil];
+          });
+        }
+        else{
+          [imp pickRedEnvelopCluster:sid clusterId:cluseId successBlock:nil failureBlock:nil];
+        }
+        
+      }
+      
     }
   }];
   
 }
 
++ (BOOL)disposeCongratsRegula:(NSString *)regular congrats:(NSString *)congrats{
+ 
+  NSString *regularText = regular;
+  __block BOOL canPick = NO;
+  if (regular.length == 0) {
+    canPick = YES;
+  }
+  
+  if (regularText.length > 0 && congrats.length > 0) {
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regularText options:0 error:&error];
+    [regex enumerateMatchesInString:congrats options:0 range:NSMakeRange(0, congrats.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop2) {
+      NSInteger cout = [result numberOfRanges];
+      if (cout >= 1) {
+        canPick = YES;
+        *stop2 = YES;
+      }
+    }];
+  }
+  return canPick;
+}
+
++ (BOOL)disposeNameCongratsRegula:(NSString *)regular name:(NSString *)name{
+     //名字匹配到的不抢
+  NSString *regularText = regular;
+  __block BOOL canPick = YES;
+  
+  if (regularText.length > 0 && name.length > 0) {
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:regularText options:0 error:&error];
+    [regex enumerateMatchesInString:name options:0 range:NSMakeRange(0, name.length) usingBlock:^(NSTextCheckingResult *result, NSMatchingFlags flags, BOOL *stop2) {
+      NSInteger cout = [result numberOfRanges];
+      if (cout >= 1) {
+        canPick = NO;
+        *stop2 = YES;
+      }
+    }];
+  }
+  return canPick;
+}
 
 
 - (DingTalkConfig *)dingtalkConfig {
   if (!_dingtalkConfig) {
-    
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:kYLObserverHongBaoEnabledDefaultsKey];
-    _dingtalkConfig = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (!gDingtalkConfig) {
+      NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:kYLObserverHongBaoEnabledDefaultsKey];
+      gDingtalkConfig = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    _dingtalkConfig = gDingtalkConfig;
     
     
     if (!_dingtalkConfig) {
       _dingtalkConfig = [DingTalkConfig new];
+      gDingtalkConfig = _dingtalkConfig;
     }
     
   }
@@ -102,6 +176,13 @@ DingTalkConfig *gDingtalkConfig = nil;
   return cell;
 }
 
+- (YLTextFeildTableViewCell *)createNameRegular {
+  YLTextFeildTableViewCell *cell = [YLTextFeildTableViewCell new];
+  [cell setTitle:@"名字匹配XX不抢" feildText:self.dingtalkConfig.nameregularText];
+  [cell.textField addTarget:self action:@selector(nameregularCellFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+  return cell;
+}
+
 - (YLSwitchTableViewCell *)createPickOwnerRedEnvelopCell{
   YLSwitchTableViewCell *cell = [[YLSwitchTableViewCell alloc] init];
   [cell setWithTitle:@"是否抢自己发出的" isOn:self.dingtalkConfig.pickOwnerRedEnvelop];
@@ -127,6 +208,8 @@ DingTalkConfig *gDingtalkConfig = nil;
     [mutableCells addObject:[self createPickOwnerRedEnvelopCell]];
     [mutableCells addObject:[self createDelayCell]];
     [mutableCells addObject:[self createRegular]];
+    [mutableCells addObject:[self createNameRegular]];
+    
   }
   return mutableCells;
   
@@ -205,6 +288,11 @@ DingTalkConfig *gDingtalkConfig = nil;
 
 - (void)regularCellFieldDidChange:(UITextField *)textField {
   self.dingtalkConfig.regularText = textField.text;
+  [self synchronousConfig];
+}
+
+- (void)nameregularCellFieldDidChange:(UITextField *)textField {
+  self.dingtalkConfig.nameregularText = textField.text;
   [self synchronousConfig];
 }
 

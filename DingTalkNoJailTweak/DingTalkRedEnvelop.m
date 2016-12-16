@@ -57,6 +57,10 @@
           NSLog(@"disposeConversation_extension = %@", extension);
           retDict[@"clusterid"] = extension[@"clusterid"];
           retDict[@"sid"] = extension[@"sid"];
+          retDict[@"isMine"] = @([converdation.latestMessage isMine]);
+          retDict[@"congrats"] = extension[@"congrats"];
+          retDict[@"sname"] = extension[@"sname"];
+          
           NSLog(@"disposeConversation_retDict = %@", retDict);
           [retArr addObject:retDict];
         }];
