@@ -52,7 +52,7 @@
 -(void)layoutSubviews {
     [super layoutSubviews];
     
-    CGFloat switchOriginY = round((self.contentView.frame.size.height - _theSwitch.frame.size.height) / 2.0);
+    CGFloat switchOriginY = round((self.contentView.frame.size.height - _theSwitch.frame.size.height) / 2.0 - 5);
     CGFloat switchOriginX = CGRectGetMaxX(self.contentView.frame) - _theSwitch.frame.size.width - self.tableview.separatorInset.left;
     _theSwitch.frame = CGRectMake(switchOriginX, switchOriginY, _theSwitch.frame.size.width, _theSwitch.frame.size.height);
     _theSwitch.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;

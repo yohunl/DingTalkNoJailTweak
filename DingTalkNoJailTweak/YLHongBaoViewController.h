@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface YLHongBaoViewController : UITableViewController
-+ (BOOL)isEnabled;
+
 @end
 
 

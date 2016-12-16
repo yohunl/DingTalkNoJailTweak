@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09626D071E03B2B900BF41C1 /* YLTextFeildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D061E03B2B900BF41C1 /* YLTextFeildTableViewCell.m */; };
+		09626D0A1E03BA4700BF41C1 /* UIView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D091E03BA4700BF41C1 /* UIView+Helpers.m */; };
+		09626D0D1E03C01A00BF41C1 /* DingTalkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D0C1E03C01A00BF41C1 /* DingTalkConfig.m */; };
 		099FC7021DF9236C00686B81 /* DingTalkNoJailTweak.m in Sources */ = {isa = PBXBuildFile; fileRef = 099FC7011DF9236C00686B81 /* DingTalkNoJailTweak.m */; };
 		099FC7031DF9236C00686B81 /* DingTalkNoJailTweak.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 099FC7001DF9236C00686B81 /* DingTalkNoJailTweak.h */; };
 		099FC70B1DF9238000686B81 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 099FC70A1DF9238000686B81 /* Aspects.m */; };
@@ -36,6 +39,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		09626D051E03B2B900BF41C1 /* YLTextFeildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLTextFeildTableViewCell.h; sourceTree = "<group>"; };
+		09626D061E03B2B900BF41C1 /* YLTextFeildTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLTextFeildTableViewCell.m; sourceTree = "<group>"; };
+		09626D081E03BA4700BF41C1 /* UIView+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helpers.h"; sourceTree = "<group>"; };
+		09626D091E03BA4700BF41C1 /* UIView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helpers.m"; sourceTree = "<group>"; };
+		09626D0B1E03C01A00BF41C1 /* DingTalkConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DingTalkConfig.h; sourceTree = "<group>"; };
+		09626D0C1E03C01A00BF41C1 /* DingTalkConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DingTalkConfig.m; sourceTree = "<group>"; };
 		099FC6FD1DF9236C00686B81 /* libDingTalkNoJailTweak.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDingTalkNoJailTweak.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		099FC7001DF9236C00686B81 /* DingTalkNoJailTweak.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DingTalkNoJailTweak.h; sourceTree = "<group>"; };
 		099FC7011DF9236C00686B81 /* DingTalkNoJailTweak.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DingTalkNoJailTweak.m; sourceTree = "<group>"; };
@@ -75,6 +84,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09626D041E03B28200BF41C1 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				099FC71C1DF923AC00686B81 /* YLSwitchTableViewCell.h */,
+				099FC71D1DF923AC00686B81 /* YLSwitchTableViewCell.m */,
+				09626D051E03B2B900BF41C1 /* YLTextFeildTableViewCell.h */,
+				09626D061E03B2B900BF41C1 /* YLTextFeildTableViewCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
 		099FC6F41DF9236C00686B81 = {
 			isa = PBXGroup;
 			children = (
@@ -94,6 +114,11 @@
 		099FC6FF1DF9236C00686B81 /* DingTalkNoJailTweak */ = {
 			isa = PBXGroup;
 			children = (
+				09626D0B1E03C01A00BF41C1 /* DingTalkConfig.h */,
+				09626D0C1E03C01A00BF41C1 /* DingTalkConfig.m */,
+				09626D081E03BA4700BF41C1 /* UIView+Helpers.h */,
+				09626D091E03BA4700BF41C1 /* UIView+Helpers.m */,
+				09626D041E03B28200BF41C1 /* Cell */,
 				099FC7101DF923AC00686B81 /* YLAssitManager.h */,
 				099FC7111DF923AC00686B81 /* YLAssitManager.m */,
 				099FC7121DF923AC00686B81 /* YLCoordinatesViewController.h */,
@@ -106,8 +131,6 @@
 				099FC7191DF923AC00686B81 /* YLGlobalViewController.m */,
 				099FC71A1DF923AC00686B81 /* YLHongBaoViewController.h */,
 				099FC71B1DF923AC00686B81 /* YLHongBaoViewController.m */,
-				099FC71C1DF923AC00686B81 /* YLSwitchTableViewCell.h */,
-				099FC71D1DF923AC00686B81 /* YLSwitchTableViewCell.m */,
 				099FC71E1DF923AC00686B81 /* YLUtility.h */,
 				099FC71F1DF923AC00686B81 /* YLUtility.m */,
 				099FC7201DF923AC00686B81 /* YLWindow.h */,
@@ -181,8 +204,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				099FC7281DF923AC00686B81 /* YLSwitchTableViewCell.m in Sources */,
+				09626D0D1E03C01A00BF41C1 /* DingTalkConfig.m in Sources */,
+				09626D071E03B2B900BF41C1 /* YLTextFeildTableViewCell.m in Sources */,
 				099FC7291DF923AC00686B81 /* YLUtility.m in Sources */,
 				099FC7261DF923AC00686B81 /* YLGlobalViewController.m in Sources */,
+				09626D0A1E03BA4700BF41C1 /* UIView+Helpers.m in Sources */,
 				099FC7271DF923AC00686B81 /* YLHongBaoViewController.m in Sources */,
 				099FC7231DF923AC00686B81 /* YLCoordinatesViewController.m in Sources */,
 				099FC70F1DF9238D00686B81 /* DingTalkRedEnvelop.m in Sources */,

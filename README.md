@@ -8,9 +8,9 @@
 ## DingTalkNoJailTweak.xcodeproj工程
 这个用来方便的查看代码的.虽然它也可以用来生成动态链接库,但是这里我提供了一个脚本 build_dylib.sh来生成自动抢红包的逻辑的dylib.
 
-## 越狱加载抢红包插件的tweak 目录
+## JailBreakLoadtweak 目录
 这个tweak是用来在越狱手机上加载build_dylib.sh生成的抢红包的dylib的.编译方式,同第一个.   
- 不过要先运行build_dylib.sh生成dylib.然后将生成的 bin/univesal/libDingTalkNoJailTweak.ydlib拷贝到 越狱加载抢红包插件的tweak/layout/Library/Application Support/DingDing/目录下
+ 不过要先运行build_dylib.sh生成dylib.然后将生成的 bin/univesal/libDingTalkNoJailTweak.ydlib拷贝到 JailBreakLoadtweak/layout/Library/Application Support/DingDing/目录下
 对于电脑上安装了theos环境的来说.更改目录下makefile文件中的THEOS_DEVICE_IP = 10.0.45.93为你自己的手机的ip.  
 然后执行命令 make package install,就可以将其安装到越狱的手机上.一旦安装了,打开钉钉,会出现一个菜单  
 
