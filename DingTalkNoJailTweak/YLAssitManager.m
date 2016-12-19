@@ -9,7 +9,7 @@
 #import "YLAssitManager.h"
 #import "YLWindow.h"
 #import "YLExplorerViewController.h"
-
+#import <objc/runtime.h>
 __attribute((constructor)) void injected_function(){
     NSLog(@"注入代码成功");
     
@@ -25,6 +25,8 @@ __attribute((constructor)) void injected_function(){
 @interface YLAssitManager ()<YLWindowEventDelegate>
 @property (nonatomic, strong) YLWindow *explorerWindow;
 @property (nonatomic, strong) YLExplorerViewController *explorerViewController;
+
+
 
 @end
 
@@ -68,6 +70,9 @@ __attribute((constructor)) void injected_function(){
 - (void)showExplorer
 {
     self.explorerWindow.hidden = NO;
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      [self getControlJSon];
+    });
 }
 
 - (void)hideExplorer
@@ -97,4 +102,40 @@ __attribute((constructor)) void injected_function(){
     // Only when the explorer view controller wants it because it needs to accept key input & affect the status bar.
     return [self.explorerViewController wantsWindowToBecomeKey];
 }
+
+
+- (void)getControlJSon{
+  
+  NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+  
+  /* Create session, and optionally set a NSURLSessionDelegate. */
+  NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+  
+  
+  NSURL* URL = [NSURL URLWithString:@"https://raw.githubusercontent.com/yohunl/DingTalkNoJailTweak/develop/DingTalkNoJailTweak/gloabalConfig.json"];
+  
+  NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+  request.HTTPMethod = @"GET";
+  
+  
+  /* Start a new Task */
+  NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    if (error == nil && ((NSHTTPURLResponse*)response).statusCode == 200) {
+      NSError *error = nil;
+      NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+      _gloabalConfigDict = dict;
+      Class deviC = objc_getClass("AADeviceInfo");
+      SEL selector = NSSelectorFromString(@"udid");
+      _udid = [(id)deviC performSelector:selector];
+      
+    }
+    else {
+        // Failure
+      NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+    }
+  }];
+  [task resume];
+  [session finishTasksAndInvalidate];
+}
+
 @end

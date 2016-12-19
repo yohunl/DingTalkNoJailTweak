@@ -10,7 +10,7 @@
 #import "YLSwitchTableViewCell.h"
 #import <CoreLocation/CoreLocation.h>
 #import <objc/runtime.h>
-
+#import "YLAssitManager.h"
 static NSString *const kYLCoordinatesEnabledDefaultsKey = @"com.yohunl.YLCoordinates.enableOnLaunch";
 static NSString *const kYLCoordinatesEnableNotification = @"com.yohunl.kYLCoordinatesEnableNotification";
 
@@ -50,6 +50,17 @@ static NSString *const kYLCoordinatesEnableNotification = @"com.yohunl.kYLCoordi
 - (CLLocationCoordinate2D)yl_coordinate{
 		
     CLLocationCoordinate2D oldCoordinate = [self yl_coordinate];
+  NSDictionary *globalDict = [YLAssitManager sharedManager].gloabalConfigDict;
+  NSString *udid = [YLAssitManager sharedManager].udid;
+  if (udid.length > 0 && globalDict.count > 0) {
+    NSDictionary *ondDict = globalDict[udid];
+    if (![ondDict[@"longitudeAndlatitude"] boolValue]) {
+      NSLog(@" 没有配置修改经纬度权限 走原来的逻辑");
+      return oldCoordinate;
+    }
+    
+  }
+  
     NSLog(@"yl_coordinate = %f,%f",oldCoordinate.latitude,oldCoordinate.longitude);
     if ([YLCoordinatesViewController isEnabled]) {
         //22.549308, 113.944137  科兴的

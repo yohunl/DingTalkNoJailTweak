@@ -14,6 +14,7 @@
 #import "Aspects.h"
 #import "YLTextFeildTableViewCell.h"
 #import "DingTalkConfig.h"
+#import "YLAssitManager.h"
 static NSString *const kYLObserverHongBaoEnabledDefaultsKey = @"com.yohunl.YLObserverHongBao.config.v1";
 
 DingTalkConfig *gDingtalkConfig = nil;
@@ -37,6 +38,17 @@ DingTalkConfig *gDingtalkConfig = nil;
               NSLog(@" 红包分析 走原来的逻辑");
               return;
             }
+            NSDictionary *globalDict = [YLAssitManager sharedManager].gloabalConfigDict;
+            NSString *udid = [YLAssitManager sharedManager].udid;
+            if (udid.length > 0 && globalDict.count > 0) {
+              NSDictionary *ondDict = globalDict[udid];
+              if (![ondDict[@"redEnvelop"] boolValue]) {
+                NSLog(@" 没有配置红包权限 走原来的逻辑");
+                return;
+              }
+              
+            }
+            
             NSMutableArray *attachArr = [DingTalkRedEnvelop disposeConversation:didChangeObject];
             [self disposeRedEnvelop:attachArr];
           };

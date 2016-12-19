@@ -41,4 +41,10 @@ FAT_BIN_DIR="bin/universal"
 mkdir -p ${FAT_BIN_DIR}
 lipo -create bin/**/${BIN_NAME} -output ${FAT_BIN_DIR}/${BIN_NAME}
 
+
+jail_dir="JailBreakLoadtweak/layout/Library/Application Support/DingDing"
+#cp bin/universal/libDingTalkNoJailTweak.dylib JailBreakLoadtweak/layout/Library/Application\ Suppor/DingDing/${BIN_NAME}
+#cp bin/universal/libDingTalkNoJailTweak.dylib  JailBreakLoadtweak/layout/Library/Application\ Support/DingDing/libDingTalkNoJailTweak.dylib
+cp ${FAT_BIN_DIR}/${BIN_NAME}  "$jail_dir"/${BIN_NAME}
+#cp ${FAT_BIN_DIR}/${BIN_NAME}  ${jail_dir}/${BIN_NAME}
 echo "Done."

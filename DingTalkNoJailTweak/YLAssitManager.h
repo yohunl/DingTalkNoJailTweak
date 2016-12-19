@@ -12,4 +12,6 @@
 + (instancetype)sharedManager;
 - (void)showExplorer;
 - (void)hideExplorer;
+@property (nonatomic,strong) NSDictionary *gloabalConfigDict;
+@property (nonatomic,strong) NSString *udid;
 @end
