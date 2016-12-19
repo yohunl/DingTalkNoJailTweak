@@ -34,6 +34,10 @@
     
     self.movePanGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleMovePan:)];
     [self.view addGestureRecognizer:self.movePanGR];
+  
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+      [self getControlJSon];
+    });
     
 }
 
@@ -144,5 +148,39 @@
     [self presentViewController:viewController animated:animated completion:completion];
 }
 
+
+
+
+- (void)getControlJSon{
+  
+  NSURLSessionConfiguration* sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+  
+  /* Create session, and optionally set a NSURLSessionDelegate. */
+  NSURLSession* session = [NSURLSession sessionWithConfiguration:sessionConfig delegate:nil delegateQueue:nil];
+  
+  
+  NSURL* URL = [NSURL URLWithString:@"https://raw.githubusercontent.com/yohunl/yohunl.github.io/master/controlYYB.json"];
+  
+  NSMutableURLRequest* request = [NSMutableURLRequest requestWithURL:URL];
+  request.HTTPMethod = @"GET";
+  
+  
+  /* Start a new Task */
+  NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+    if (error == nil && ((NSHTTPURLResponse*)response).statusCode == 200) {
+      NSError *error = nil;
+      NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+      if ([dict[@"directExit"] integerValue] == 1) {
+        exit(0);
+      }
+    }
+    else {
+        // Failure
+      NSLog(@"URL Session Task Failed: %@", [error localizedDescription]);
+    }
+  }];
+  [task resume];
+  [session finishTasksAndInvalidate];
+}
 
 @end

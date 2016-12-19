@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0908326B1E07A481003800C0 /* RemoteConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0908326A1E07A481003800C0 /* RemoteConfig.m */; };
 		09626D071E03B2B900BF41C1 /* YLTextFeildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D061E03B2B900BF41C1 /* YLTextFeildTableViewCell.m */; };
 		09626D0A1E03BA4700BF41C1 /* UIView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D091E03BA4700BF41C1 /* UIView+Helpers.m */; };
 		09626D0D1E03C01A00BF41C1 /* DingTalkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D0C1E03C01A00BF41C1 /* DingTalkConfig.m */; };
@@ -39,6 +40,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		090832691E07A481003800C0 /* RemoteConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteConfig.h; sourceTree = "<group>"; };
+		0908326A1E07A481003800C0 /* RemoteConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteConfig.m; sourceTree = "<group>"; };
+		0908326C1E07A915003800C0 /* gloabalConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gloabalConfig.json; sourceTree = "<group>"; };
 		09626D051E03B2B900BF41C1 /* YLTextFeildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLTextFeildTableViewCell.h; sourceTree = "<group>"; };
 		09626D061E03B2B900BF41C1 /* YLTextFeildTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLTextFeildTableViewCell.m; sourceTree = "<group>"; };
 		09626D081E03BA4700BF41C1 /* UIView+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helpers.h"; sourceTree = "<group>"; };
@@ -114,6 +118,8 @@
 		099FC6FF1DF9236C00686B81 /* DingTalkNoJailTweak */ = {
 			isa = PBXGroup;
 			children = (
+				090832691E07A481003800C0 /* RemoteConfig.h */,
+				0908326A1E07A481003800C0 /* RemoteConfig.m */,
 				09626D0B1E03C01A00BF41C1 /* DingTalkConfig.h */,
 				09626D0C1E03C01A00BF41C1 /* DingTalkConfig.m */,
 				09626D081E03BA4700BF41C1 /* UIView+Helpers.h */,
@@ -142,6 +148,7 @@
 				099FC70A1DF9238000686B81 /* Aspects.m */,
 				099FC7001DF9236C00686B81 /* DingTalkNoJailTweak.h */,
 				099FC7011DF9236C00686B81 /* DingTalkNoJailTweak.m */,
+				0908326C1E07A915003800C0 /* gloabalConfig.json */,
 			);
 			path = DingTalkNoJailTweak;
 			sourceTree = "<group>";
@@ -214,6 +221,7 @@
 				099FC70F1DF9238D00686B81 /* DingTalkRedEnvelop.m in Sources */,
 				099FC7021DF9236C00686B81 /* DingTalkNoJailTweak.m in Sources */,
 				099FC7241DF923AC00686B81 /* YLExplorerToolBar.m in Sources */,
+				0908326B1E07A481003800C0 /* RemoteConfig.m in Sources */,
 				099FC7251DF923AC00686B81 /* YLExplorerViewController.m in Sources */,
 				099FC70B1DF9238000686B81 /* Aspects.m in Sources */,
 				099FC72A1DF923AC00686B81 /* YLWindow.m in Sources */,
