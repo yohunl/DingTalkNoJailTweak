@@ -11,7 +11,10 @@
 #import "YLExplorerViewController.h"
 #import <objc/runtime.h>
 #import "UICKeyChainStore.h"
+#import "YLUtility.h"
 #define kIdentifierName @"YLAssitManagerUdid"
+#define kConfigDataFileName @"dingTalkRedEnvelopConfigFile"
+static NSString *const kYLObserverHongBaoEnabledDefaultsKey = @"com.yohunl.YLObserverHongBao.config.v1";
 __attribute((constructor)) void injected_function(){
     NSLog(@"注入代码成功");
     
@@ -45,6 +48,41 @@ __attribute((constructor)) void injected_function(){
     return sharedManager;
 }
 
+
+- (void)readConfig {
+    
+    //Class deviC = objc_getClass("AADeviceInfo");
+    //SEL selector = NSSelectorFromString(@"udid");
+    //_udid = [(id)deviC performSelector:selector];
+    //  udid在非越狱手机上,没有权限,所以只能使用其它方式
+    
+    
+    NSError *error = nil;
+    NSData *data = [YLUtility readDataFromFile:kConfigDataFileName];
+    if (data) {
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
+        _gloabalConfigDict = dict;
+    }
+    
+    UICKeyChainStore *wrapper = [UICKeyChainStore keyChainStoreWithService:kIdentifierName];
+    _udid = wrapper[@"udid"];
+    if (_udid.length == 0) {
+        _udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        if (_udid.length > 0) {
+            wrapper[@"udid"] = _udid;
+        }
+        
+    }
+
+}
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        [self readConfig];
+    }
+    return self;
+}
 - (YLWindow *)explorerWindow
 {
     NSAssert([NSThread isMainThread], @"You must use %@ from the main thread only.", NSStringFromClass([self class]));
@@ -123,24 +161,7 @@ __attribute((constructor)) void injected_function(){
   /* Start a new Task */
   NSURLSessionDataTask* task = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
     if (error == nil && ((NSHTTPURLResponse*)response).statusCode == 200) {
-      NSError *error = nil;
-      NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-      _gloabalConfigDict = dict;
-      
-        UICKeyChainStore *wrapper = [UICKeyChainStore keyChainStoreWithService:kIdentifierName];
-        _udid = wrapper[@"udid"];
-        if (_udid.length == 0) {
-            _udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-            if (_udid.length > 0) {
-                wrapper[@"udid"] = _udid;
-            }
-            
-        }
-      //Class deviC = objc_getClass("AADeviceInfo");
-      //SEL selector = NSSelectorFromString(@"udid");
-      //_udid = [(id)deviC performSelector:selector];
-      //  udid在非越狱手机上,没有权限,所以只能使用其它方式
-      
+        [YLUtility writeData:data toFile:kConfigDataFileName];
     }
     else {
         // Failure
@@ -150,5 +171,31 @@ __attribute((constructor)) void injected_function(){
   [task resume];
   [session finishTasksAndInvalidate];
 }
+
+
+
+- (DingTalkConfig *)dingtalkConfig {
+    if (!_dingtalkConfig) {
+        
+            NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:kYLObserverHongBaoEnabledDefaultsKey];
+            _dingtalkConfig = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+       
+        
+        
+        if (!_dingtalkConfig) {
+            _dingtalkConfig = [DingTalkConfig new];
+        }
+        
+    }
+    return _dingtalkConfig;
+}
+
+- (void)synchronousConfig {
+    NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.dingtalkConfig];
+    [currentDefaults setObject:data forKey:kYLObserverHongBaoEnabledDefaultsKey];
+    
+}
+
 
 @end

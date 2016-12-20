@@ -14,7 +14,7 @@
 #import "UIView+Helpers.h"
 @interface YLGlobalViewController ()
 @property (nonatomic,strong) NSMutableArray<YLCellModel *> *cellModelArr;
-@property (nonatomic,strong) UILabel *tableFootView;
+@property (nonatomic,strong) UITextField *tableFootView;
 @end
 @implementation YLGlobalViewController
 - (id)initWithStyle:(UITableViewStyle)style
@@ -56,9 +56,9 @@
     
   }
     
-    _tableFootView = [UILabel new];
+    _tableFootView = [UITextField new];
     _tableFootView.textColor = [UIColor redColor];
-    _tableFootView.font = [UIFont systemFontOfSize:16];
+    _tableFootView.font = [UIFont systemFontOfSize:13];
     _tableFootView.frameSize = CGSizeMake(self.tableView.frameSizeWidth, 44);
     _tableFootView.text = udid;
     self.tableView.tableFooterView = _tableFootView;

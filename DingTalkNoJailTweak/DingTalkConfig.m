@@ -16,6 +16,9 @@
   [encoder encodeBool:self.pickOwnerRedEnvelop forKey:@"pickOwnerRedEnvelop"];
   [encoder encodeObject:self.regularText forKey:@"regularText"];
   [encoder encodeObject:self.nameregularText forKey:@"nameregularText"];
+    [encoder encodeDouble:self.latitude forKey:@"latitude"];
+    [encoder encodeDouble:self.longitude forKey:@"longitude"];
+    
   
 }
 
@@ -28,6 +31,8 @@
     self.pickOwnerRedEnvelop = [decoder decodeBoolForKey:@"pickOwnerRedEnvelop"];
     self.regularText = [decoder decodeObjectForKey:@"regularText"];
     self.nameregularText = [decoder decodeObjectForKey:@"nameregularText"];
+      self.latitude = [decoder decodeDoubleForKey:@"latitude"];
+      self.longitude = [decoder decodeDoubleForKey:@"longitude"];
     
   }
   return self;

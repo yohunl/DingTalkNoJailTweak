@@ -7,14 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0908326B1E07A481003800C0 /* RemoteConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0908326A1E07A481003800C0 /* RemoteConfig.m */; };
 		090832A41E07AF17003800C0 /* YLCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 090832A31E07AF17003800C0 /* YLCellModel.m */; };
 		0941B7A71E09294B005FEEA8 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0941B7A61E09294B005FEEA8 /* UICKeyChainStore.m */; };
 		09626D071E03B2B900BF41C1 /* YLTextFeildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D061E03B2B900BF41C1 /* YLTextFeildTableViewCell.m */; };
 		09626D0A1E03BA4700BF41C1 /* UIView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D091E03BA4700BF41C1 /* UIView+Helpers.m */; };
 		09626D0D1E03C01A00BF41C1 /* DingTalkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D0C1E03C01A00BF41C1 /* DingTalkConfig.m */; };
-		099FC7021DF9236C00686B81 /* DingTalkNoJailTweak.m in Sources */ = {isa = PBXBuildFile; fileRef = 099FC7011DF9236C00686B81 /* DingTalkNoJailTweak.m */; };
-		099FC7031DF9236C00686B81 /* DingTalkNoJailTweak.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 099FC7001DF9236C00686B81 /* DingTalkNoJailTweak.h */; };
+		096C80D51E098EBF00427DBE /* YLMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C80D41E098EBF00427DBE /* YLMapViewController.m */; };
+		096C80D81E0991DE00427DBE /* YLLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C80D71E0991DE00427DBE /* YLLocationManager.m */; };
+		096C80DB1E0994E100427DBE /* YLMyAnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C80DA1E0994E100427DBE /* YLMyAnotation.m */; };
+		096C80DE1E0995E400427DBE /* YLLocationCaluate.m in Sources */ = {isa = PBXBuildFile; fileRef = 096C80DD1E0995E400427DBE /* YLLocationCaluate.m */; };
 		099FC70B1DF9238000686B81 /* Aspects.m in Sources */ = {isa = PBXBuildFile; fileRef = 099FC70A1DF9238000686B81 /* Aspects.m */; };
 		099FC70F1DF9238D00686B81 /* DingTalkRedEnvelop.m in Sources */ = {isa = PBXBuildFile; fileRef = 099FC70E1DF9238D00686B81 /* DingTalkRedEnvelop.m */; };
 		099FC7221DF923AC00686B81 /* YLAssitManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 099FC7111DF923AC00686B81 /* YLAssitManager.m */; };
@@ -35,15 +36,12 @@
 			dstPath = "include/$(PRODUCT_NAME)";
 			dstSubfolderSpec = 16;
 			files = (
-				099FC7031DF9236C00686B81 /* DingTalkNoJailTweak.h in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		090832691E07A481003800C0 /* RemoteConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemoteConfig.h; sourceTree = "<group>"; };
-		0908326A1E07A481003800C0 /* RemoteConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemoteConfig.m; sourceTree = "<group>"; };
 		0908326C1E07A915003800C0 /* gloabalConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gloabalConfig.json; sourceTree = "<group>"; };
 		090832A21E07AF17003800C0 /* YLCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLCellModel.h; sourceTree = "<group>"; };
 		090832A31E07AF17003800C0 /* YLCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLCellModel.m; sourceTree = "<group>"; };
@@ -55,9 +53,15 @@
 		09626D091E03BA4700BF41C1 /* UIView+Helpers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Helpers.m"; sourceTree = "<group>"; };
 		09626D0B1E03C01A00BF41C1 /* DingTalkConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DingTalkConfig.h; sourceTree = "<group>"; };
 		09626D0C1E03C01A00BF41C1 /* DingTalkConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DingTalkConfig.m; sourceTree = "<group>"; };
+		096C80D31E098EBF00427DBE /* YLMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLMapViewController.h; sourceTree = "<group>"; };
+		096C80D41E098EBF00427DBE /* YLMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLMapViewController.m; sourceTree = "<group>"; };
+		096C80D61E0991DE00427DBE /* YLLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLLocationManager.h; sourceTree = "<group>"; };
+		096C80D71E0991DE00427DBE /* YLLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLLocationManager.m; sourceTree = "<group>"; };
+		096C80D91E0994E100427DBE /* YLMyAnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLMyAnotation.h; sourceTree = "<group>"; };
+		096C80DA1E0994E100427DBE /* YLMyAnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLMyAnotation.m; sourceTree = "<group>"; };
+		096C80DC1E0995E400427DBE /* YLLocationCaluate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLLocationCaluate.h; sourceTree = "<group>"; };
+		096C80DD1E0995E400427DBE /* YLLocationCaluate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLLocationCaluate.m; sourceTree = "<group>"; };
 		099FC6FD1DF9236C00686B81 /* libDingTalkNoJailTweak.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libDingTalkNoJailTweak.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		099FC7001DF9236C00686B81 /* DingTalkNoJailTweak.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DingTalkNoJailTweak.h; sourceTree = "<group>"; };
-		099FC7011DF9236C00686B81 /* DingTalkNoJailTweak.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DingTalkNoJailTweak.m; sourceTree = "<group>"; };
 		099FC7091DF9238000686B81 /* Aspects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aspects.h; sourceTree = "<group>"; };
 		099FC70A1DF9238000686B81 /* Aspects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Aspects.m; sourceTree = "<group>"; };
 		099FC70C1DF9238D00686B81 /* DingTalkHead.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DingTalkHead.h; sourceTree = "<group>"; };
@@ -94,9 +98,88 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0947C5E41E097F28008DEC9F /* KeyChain操作 */ = {
+			isa = PBXGroup;
+			children = (
+				0941B7A51E09294B005FEEA8 /* UICKeyChainStore.h */,
+				0941B7A61E09294B005FEEA8 /* UICKeyChainStore.m */,
+			);
+			name = "KeyChain操作";
+			sourceTree = "<group>";
+		};
+		0947C5E51E097F44008DEC9F /* 红包 */ = {
+			isa = PBXGroup;
+			children = (
+				099FC70C1DF9238D00686B81 /* DingTalkHead.h */,
+				099FC70D1DF9238D00686B81 /* DingTalkRedEnvelop.h */,
+				099FC70E1DF9238D00686B81 /* DingTalkRedEnvelop.m */,
+				09626D0B1E03C01A00BF41C1 /* DingTalkConfig.h */,
+				09626D0C1E03C01A00BF41C1 /* DingTalkConfig.m */,
+				099FC71A1DF923AC00686B81 /* YLHongBaoViewController.h */,
+				099FC71B1DF923AC00686B81 /* YLHongBaoViewController.m */,
+			);
+			name = "红包";
+			sourceTree = "<group>";
+		};
+		0947C5E61E097F6A008DEC9F /* 经纬度 */ = {
+			isa = PBXGroup;
+			children = (
+				099FC7121DF923AC00686B81 /* YLCoordinatesViewController.h */,
+				099FC7131DF923AC00686B81 /* YLCoordinatesViewController.m */,
+				096C80D31E098EBF00427DBE /* YLMapViewController.h */,
+				096C80D41E098EBF00427DBE /* YLMapViewController.m */,
+				096C80D91E0994E100427DBE /* YLMyAnotation.h */,
+				096C80DA1E0994E100427DBE /* YLMyAnotation.m */,
+			);
+			name = "经纬度";
+			sourceTree = "<group>";
+		};
+		0947C5E71E097FA2008DEC9F /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				0947C5E81E097FAE008DEC9F /* aspects */,
+				0947C5E41E097F28008DEC9F /* KeyChain操作 */,
+			);
+			name = Vendors;
+			sourceTree = "<group>";
+		};
+		0947C5E81E097FAE008DEC9F /* aspects */ = {
+			isa = PBXGroup;
+			children = (
+				099FC7091DF9238000686B81 /* Aspects.h */,
+				099FC70A1DF9238000686B81 /* Aspects.m */,
+			);
+			name = aspects;
+			sourceTree = "<group>";
+		};
+		0947C5E91E097FEC008DEC9F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				099FC7101DF923AC00686B81 /* YLAssitManager.h */,
+				099FC7111DF923AC00686B81 /* YLAssitManager.m */,
+				099FC7141DF923AC00686B81 /* YLExplorerToolBar.h */,
+				099FC7151DF923AC00686B81 /* YLExplorerToolBar.m */,
+				099FC7161DF923AC00686B81 /* YLExplorerViewController.h */,
+				099FC7171DF923AC00686B81 /* YLExplorerViewController.m */,
+				099FC7181DF923AC00686B81 /* YLGlobalViewController.h */,
+				099FC7191DF923AC00686B81 /* YLGlobalViewController.m */,
+				099FC71E1DF923AC00686B81 /* YLUtility.h */,
+				099FC71F1DF923AC00686B81 /* YLUtility.m */,
+				099FC7201DF923AC00686B81 /* YLWindow.h */,
+				099FC7211DF923AC00686B81 /* YLWindow.m */,
+				096C80D61E0991DE00427DBE /* YLLocationManager.h */,
+				096C80D71E0991DE00427DBE /* YLLocationManager.m */,
+				096C80DC1E0995E400427DBE /* YLLocationCaluate.h */,
+				096C80DD1E0995E400427DBE /* YLLocationCaluate.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		09626D041E03B28200BF41C1 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				090832A21E07AF17003800C0 /* YLCellModel.h */,
+				090832A31E07AF17003800C0 /* YLCellModel.m */,
 				099FC71C1DF923AC00686B81 /* YLSwitchTableViewCell.h */,
 				099FC71D1DF923AC00686B81 /* YLSwitchTableViewCell.m */,
 				09626D051E03B2B900BF41C1 /* YLTextFeildTableViewCell.h */,
@@ -124,41 +207,14 @@
 		099FC6FF1DF9236C00686B81 /* DingTalkNoJailTweak */ = {
 			isa = PBXGroup;
 			children = (
-				0941B7A51E09294B005FEEA8 /* UICKeyChainStore.h */,
-				0941B7A61E09294B005FEEA8 /* UICKeyChainStore.m */,
-				090832691E07A481003800C0 /* RemoteConfig.h */,
-				0908326A1E07A481003800C0 /* RemoteConfig.m */,
-				09626D0B1E03C01A00BF41C1 /* DingTalkConfig.h */,
-				09626D0C1E03C01A00BF41C1 /* DingTalkConfig.m */,
+				0947C5E91E097FEC008DEC9F /* Common */,
+				0947C5E71E097FA2008DEC9F /* Vendors */,
+				0947C5E61E097F6A008DEC9F /* 经纬度 */,
+				0947C5E51E097F44008DEC9F /* 红包 */,
+				09626D041E03B28200BF41C1 /* Cell */,
 				09626D081E03BA4700BF41C1 /* UIView+Helpers.h */,
 				09626D091E03BA4700BF41C1 /* UIView+Helpers.m */,
-				09626D041E03B28200BF41C1 /* Cell */,
-				099FC7101DF923AC00686B81 /* YLAssitManager.h */,
-				099FC7111DF923AC00686B81 /* YLAssitManager.m */,
-				099FC7121DF923AC00686B81 /* YLCoordinatesViewController.h */,
-				099FC7131DF923AC00686B81 /* YLCoordinatesViewController.m */,
-				099FC7141DF923AC00686B81 /* YLExplorerToolBar.h */,
-				099FC7151DF923AC00686B81 /* YLExplorerToolBar.m */,
-				099FC7161DF923AC00686B81 /* YLExplorerViewController.h */,
-				099FC7171DF923AC00686B81 /* YLExplorerViewController.m */,
-				099FC7181DF923AC00686B81 /* YLGlobalViewController.h */,
-				099FC7191DF923AC00686B81 /* YLGlobalViewController.m */,
-				099FC71A1DF923AC00686B81 /* YLHongBaoViewController.h */,
-				099FC71B1DF923AC00686B81 /* YLHongBaoViewController.m */,
-				099FC71E1DF923AC00686B81 /* YLUtility.h */,
-				099FC71F1DF923AC00686B81 /* YLUtility.m */,
-				099FC7201DF923AC00686B81 /* YLWindow.h */,
-				099FC7211DF923AC00686B81 /* YLWindow.m */,
-				099FC70C1DF9238D00686B81 /* DingTalkHead.h */,
-				099FC70D1DF9238D00686B81 /* DingTalkRedEnvelop.h */,
-				099FC70E1DF9238D00686B81 /* DingTalkRedEnvelop.m */,
-				099FC7091DF9238000686B81 /* Aspects.h */,
-				099FC70A1DF9238000686B81 /* Aspects.m */,
-				099FC7001DF9236C00686B81 /* DingTalkNoJailTweak.h */,
-				099FC7011DF9236C00686B81 /* DingTalkNoJailTweak.m */,
 				0908326C1E07A915003800C0 /* gloabalConfig.json */,
-				090832A21E07AF17003800C0 /* YLCellModel.h */,
-				090832A31E07AF17003800C0 /* YLCellModel.m */,
 			);
 			path = DingTalkNoJailTweak;
 			sourceTree = "<group>";
@@ -224,16 +280,18 @@
 				099FC7281DF923AC00686B81 /* YLSwitchTableViewCell.m in Sources */,
 				09626D0D1E03C01A00BF41C1 /* DingTalkConfig.m in Sources */,
 				09626D071E03B2B900BF41C1 /* YLTextFeildTableViewCell.m in Sources */,
+				096C80DB1E0994E100427DBE /* YLMyAnotation.m in Sources */,
 				099FC7291DF923AC00686B81 /* YLUtility.m in Sources */,
 				099FC7261DF923AC00686B81 /* YLGlobalViewController.m in Sources */,
 				09626D0A1E03BA4700BF41C1 /* UIView+Helpers.m in Sources */,
 				099FC7271DF923AC00686B81 /* YLHongBaoViewController.m in Sources */,
 				099FC7231DF923AC00686B81 /* YLCoordinatesViewController.m in Sources */,
+				096C80D51E098EBF00427DBE /* YLMapViewController.m in Sources */,
+				096C80DE1E0995E400427DBE /* YLLocationCaluate.m in Sources */,
 				099FC70F1DF9238D00686B81 /* DingTalkRedEnvelop.m in Sources */,
-				099FC7021DF9236C00686B81 /* DingTalkNoJailTweak.m in Sources */,
 				099FC7241DF923AC00686B81 /* YLExplorerToolBar.m in Sources */,
-				0908326B1E07A481003800C0 /* RemoteConfig.m in Sources */,
 				099FC7251DF923AC00686B81 /* YLExplorerViewController.m in Sources */,
+				096C80D81E0991DE00427DBE /* YLLocationManager.m in Sources */,
 				099FC70B1DF9238000686B81 /* Aspects.m in Sources */,
 				099FC72A1DF923AC00686B81 /* YLWindow.m in Sources */,
 				099FC7221DF923AC00686B81 /* YLAssitManager.m in Sources */,
