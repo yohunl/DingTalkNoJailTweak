@@ -10,6 +10,8 @@
 #import "YLWindow.h"
 #import "YLExplorerViewController.h"
 #import <objc/runtime.h>
+#import "UICKeyChainStore.h"
+#define kIdentifierName @"YLAssitManagerUdid"
 __attribute((constructor)) void injected_function(){
     NSLog(@"注入代码成功");
     
@@ -124,9 +126,20 @@ __attribute((constructor)) void injected_function(){
       NSError *error = nil;
       NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
       _gloabalConfigDict = dict;
-      Class deviC = objc_getClass("AADeviceInfo");
-      SEL selector = NSSelectorFromString(@"udid");
-      _udid = [(id)deviC performSelector:selector];
+      
+        UICKeyChainStore *wrapper = [UICKeyChainStore keyChainStoreWithService:kIdentifierName];
+        _udid = wrapper[@"udid"];
+        if (_udid.length == 0) {
+            _udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+            if (_udid.length > 0) {
+                wrapper[@"udid"] = _udid;
+            }
+            
+        }
+      //Class deviC = objc_getClass("AADeviceInfo");
+      //SEL selector = NSSelectorFromString(@"udid");
+      //_udid = [(id)deviC performSelector:selector];
+      //  udid在非越狱手机上,没有权限,所以只能使用其它方式
       
     }
     else {

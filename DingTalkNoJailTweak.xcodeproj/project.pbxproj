@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0908326B1E07A481003800C0 /* RemoteConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 0908326A1E07A481003800C0 /* RemoteConfig.m */; };
 		090832A41E07AF17003800C0 /* YLCellModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 090832A31E07AF17003800C0 /* YLCellModel.m */; };
+		0941B7A71E09294B005FEEA8 /* UICKeyChainStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 0941B7A61E09294B005FEEA8 /* UICKeyChainStore.m */; };
 		09626D071E03B2B900BF41C1 /* YLTextFeildTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D061E03B2B900BF41C1 /* YLTextFeildTableViewCell.m */; };
 		09626D0A1E03BA4700BF41C1 /* UIView+Helpers.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D091E03BA4700BF41C1 /* UIView+Helpers.m */; };
 		09626D0D1E03C01A00BF41C1 /* DingTalkConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 09626D0C1E03C01A00BF41C1 /* DingTalkConfig.m */; };
@@ -46,6 +47,8 @@
 		0908326C1E07A915003800C0 /* gloabalConfig.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = gloabalConfig.json; sourceTree = "<group>"; };
 		090832A21E07AF17003800C0 /* YLCellModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLCellModel.h; sourceTree = "<group>"; };
 		090832A31E07AF17003800C0 /* YLCellModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLCellModel.m; sourceTree = "<group>"; };
+		0941B7A51E09294B005FEEA8 /* UICKeyChainStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UICKeyChainStore.h; sourceTree = "<group>"; };
+		0941B7A61E09294B005FEEA8 /* UICKeyChainStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UICKeyChainStore.m; sourceTree = "<group>"; };
 		09626D051E03B2B900BF41C1 /* YLTextFeildTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YLTextFeildTableViewCell.h; sourceTree = "<group>"; };
 		09626D061E03B2B900BF41C1 /* YLTextFeildTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YLTextFeildTableViewCell.m; sourceTree = "<group>"; };
 		09626D081E03BA4700BF41C1 /* UIView+Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Helpers.h"; sourceTree = "<group>"; };
@@ -121,6 +124,8 @@
 		099FC6FF1DF9236C00686B81 /* DingTalkNoJailTweak */ = {
 			isa = PBXGroup;
 			children = (
+				0941B7A51E09294B005FEEA8 /* UICKeyChainStore.h */,
+				0941B7A61E09294B005FEEA8 /* UICKeyChainStore.m */,
 				090832691E07A481003800C0 /* RemoteConfig.h */,
 				0908326A1E07A481003800C0 /* RemoteConfig.m */,
 				09626D0B1E03C01A00BF41C1 /* DingTalkConfig.h */,
@@ -232,6 +237,7 @@
 				099FC70B1DF9238000686B81 /* Aspects.m in Sources */,
 				099FC72A1DF923AC00686B81 /* YLWindow.m in Sources */,
 				099FC7221DF923AC00686B81 /* YLAssitManager.m in Sources */,
+				0941B7A71E09294B005FEEA8 /* UICKeyChainStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
