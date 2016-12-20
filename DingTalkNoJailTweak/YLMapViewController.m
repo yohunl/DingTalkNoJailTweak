@@ -13,6 +13,7 @@
 #import "YLLocationManager.h"
 #import "YLMyAnotation.h"
 #import "YLLocationCaluate.h"
+#import "YLAssitManager.h"
 @interface YLMapViewController ()<MKMapViewDelegate>
 @property (strong, nonatomic) MKMapView *mapView;
 @end
@@ -64,8 +65,34 @@
     //地图类型
     //    self.mapView.mapType = MKMapTypeSatellite;
     self.mapView.delegate = self;
+    
+    
+    
+    YLMyAnotation *anno = [[YLMyAnotation alloc] init];
+    anno.coordinate = CLLocationCoordinate2DMake([YLAssitManager sharedManager].dingtalkConfig.latitude, [YLAssitManager sharedManager].dingtalkConfig.longitude);
+    anno.title = [NSString stringWithFormat:@"经度：%f",[YLAssitManager sharedManager].dingtalkConfig.longitude];
+    anno.subtitle = [NSString stringWithFormat:@"纬度：%f",[YLAssitManager sharedManager].dingtalkConfig.latitude];
+    
+    self.longitudeLabel.text = [NSString stringWithFormat:@"经度：%f",[YLAssitManager sharedManager].dingtalkConfig.longitude];
+    self.latitudeLabel.text = [NSString stringWithFormat:@"纬度：%f",[YLAssitManager sharedManager].dingtalkConfig.latitude];
+    //反地理编码
+    YLLocationCaluate *locManager = [[YLLocationCaluate alloc] init];
+    [locManager reverseGeocodeWithlatitude:[YLAssitManager sharedManager].dingtalkConfig.latitude longitude:[YLAssitManager sharedManager].dingtalkConfig.longitude success:^(NSString *address) {
+        self.addressLabel.text = [NSString stringWithFormat:@"%@",address];
+    } failure:^{
+        
+    }];
+
+    [self.mapView addAnnotation:anno];
+    
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [YLAssitManager sharedManager].dingtalkConfig.useOriginalCordinate = YES;
+}
+- (void)viewDidDisappear:(BOOL)animated {
+    [YLAssitManager sharedManager].dingtalkConfig.useOriginalCordinate = NO;
+}
 - (void)currentLocationBtnAction:(id)sender {
     [self.mapView setCenterCoordinate:self.mapView.userLocation.coordinate animated:YES];
 }
@@ -162,6 +189,9 @@
 {
     CGPoint touchPoint = [tap locationInView:tap.view];
     CLLocationCoordinate2D coordinate = [self.mapView convertPoint:touchPoint toCoordinateFromView:self.mapView];
+    [YLAssitManager sharedManager].dingtalkConfig.latitude = coordinate.latitude;
+    [YLAssitManager sharedManager].dingtalkConfig.longitude = coordinate.longitude;
+    [[YLAssitManager sharedManager]synchronousConfig];
     
     NSLog(@"%@",self.mapView.annotations);
     NSMutableArray *array = [NSMutableArray array];

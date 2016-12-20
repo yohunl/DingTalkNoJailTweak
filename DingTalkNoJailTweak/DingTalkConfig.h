@@ -18,8 +18,8 @@
 
 
 
-@property (nonatomic,assign)long latitude;//经度
-@property (nonatomic,assign)long longitude;//纬度
+@property (nonatomic,assign)double latitude;//经度
+@property (nonatomic,assign)double longitude;//纬度
 
 
 @property (nonatomic,assign) BOOL useOriginalCordinate;//在我们进行坐标选择的时候,需要使用原始的

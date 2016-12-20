@@ -184,6 +184,13 @@ __attribute((constructor)) void injected_function(){
         
         if (!_dingtalkConfig) {
             _dingtalkConfig = [DingTalkConfig new];
+            
+            //22.549308, 113.944137  科兴的
+
+        }
+        if (_dingtalkConfig.latitude == 0) {
+            _dingtalkConfig.latitude = 22.549308;
+            _dingtalkConfig.longitude = 113.944137;
         }
         
     }
