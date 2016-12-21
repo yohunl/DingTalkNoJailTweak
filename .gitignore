@@ -61,3 +61,8 @@ iOSInjectionProject/
 
 .DS_Store
 .theos/
+
+
+JailBreakLoadtweak/packages/
+
+bin/armv7/

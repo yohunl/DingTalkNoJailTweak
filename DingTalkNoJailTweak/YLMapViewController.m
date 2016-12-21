@@ -85,6 +85,10 @@
 
     [self.mapView addAnnotation:anno];
     
+    
+    NSLog(@"添加监听");
+    [self.mapView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)]];
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -132,14 +136,7 @@
     
     NSLog(@"定位：%f %f --- %i",center.latitude,center.longitude,mapView.showsUserLocation);
     
-    if (mapView.showsUserLocation) {
-        static dispatch_once_t onceToken;
-        dispatch_once(&onceToken, ^{
-            //监听MapView点击
-            NSLog(@"添加监听");
-            [mapView addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)]];
-        });
-    }
+    
     
     
     //设置地图的中心点，（以用户所在的位置为中心点）
