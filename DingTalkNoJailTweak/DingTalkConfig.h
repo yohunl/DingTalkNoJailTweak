@@ -17,7 +17,7 @@
 @property (nonatomic,strong) NSString *nameregularText;///< 名字正则表达式
 
 
-
+@property (nonatomic,assign) BOOL enableCoordinate;///< 是否开启经纬度
 @property (nonatomic,assign)double latitude;//经度
 @property (nonatomic,assign)double longitude;//纬度
 

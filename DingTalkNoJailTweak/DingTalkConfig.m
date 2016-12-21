@@ -18,6 +18,8 @@
   [encoder encodeObject:self.nameregularText forKey:@"nameregularText"];
     [encoder encodeDouble:self.latitude forKey:@"latitude"];
     [encoder encodeDouble:self.longitude forKey:@"longitude"];
+    [encoder encodeBool:self.enableCoordinate forKey:@"enableCoordinate"];
+    
     
   
 }
@@ -33,6 +35,8 @@
     self.nameregularText = [decoder decodeObjectForKey:@"nameregularText"];
       self.latitude = [decoder decodeDoubleForKey:@"latitude"];
       self.longitude = [decoder decodeDoubleForKey:@"longitude"];
+      
+      self.enableCoordinate = [decoder decodeBoolForKey:@"enableCoordinate"];
     
   }
   return self;
