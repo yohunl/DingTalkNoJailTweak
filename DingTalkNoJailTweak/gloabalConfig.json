@@ -33,7 +33,10 @@
         "redEnvelop":1,
         "longitudeAndlatitude":1,
         "name":"moliqi"
+    },
+  "C54A5E1E-DEDD-4BB6-90CE-8A45AA1DF61E":{
+        "redEnvelop":1,
+        "longitudeAndlatitude":0,
+        "name":"zhuzhenmei"
     }
-  
-  
 }
