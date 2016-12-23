@@ -62,6 +62,15 @@ __attribute((constructor)) void injected_function(){
     if (data) {
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
         _gloabalConfigDict = dict;
+        if (_gloabalConfigDict) {
+            NSArray *arr = _gloabalConfigDict[@"redEnvelopType"];
+            if (arr.count > 0) {
+                _redEnvelopTypeArr = [NSMutableArray new];
+                [_redEnvelopTypeArr addObjectsFromArray:arr];
+            }
+            
+            
+        }
     }
     
     UICKeyChainStore *wrapper = [UICKeyChainStore keyChainStoreWithService:kIdentifierName];
@@ -73,6 +82,13 @@ __attribute((constructor)) void injected_function(){
             wrapper[@"udid"] = _udid;
         }
         
+    }
+    
+    if (_redEnvelopTypeArr || _redEnvelopTypeArr.count == 0) {
+        _redEnvelopTypeArr = [NSMutableArray new];
+        [_redEnvelopTypeArr addObject:@(901)];
+        [_redEnvelopTypeArr addObject:@(902)];
+        [_redEnvelopTypeArr addObject:@(905)];
     }
 
 }

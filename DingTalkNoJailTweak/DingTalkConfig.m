@@ -19,6 +19,8 @@
     [encoder encodeDouble:self.latitude forKey:@"latitude"];
     [encoder encodeDouble:self.longitude forKey:@"longitude"];
     [encoder encodeBool:self.enableCoordinate forKey:@"enableCoordinate"];
+    [encoder encodeObject:self.redenvelopTypeText forKey:@"redenvelopTypeText"];
+    
     
     
   
@@ -37,6 +39,8 @@
       self.longitude = [decoder decodeDoubleForKey:@"longitude"];
       
       self.enableCoordinate = [decoder decodeBoolForKey:@"enableCoordinate"];
+      self.redenvelopTypeText = [decoder decodeObjectForKey:@"redenvelopTypeText"];
+     
     
   }
   return self;

@@ -9,5 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface DingTalkRedEnvelop : NSObject
++ (instancetype)sharedInstance;
 + (NSMutableArray *)disposeConversation:(id )converdation;
 @end

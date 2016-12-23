@@ -24,4 +24,6 @@
 
 @property (nonatomic,assign) BOOL useOriginalCordinate;//在我们进行坐标选择的时候,需要使用原始的
 
+@property (nonatomic,strong) NSString *redenvelopTypeText;//红包的类型,目前支持的是 901,902,905
+
 @end

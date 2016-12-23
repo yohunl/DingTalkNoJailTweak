@@ -16,5 +16,7 @@
 @property (nonatomic,strong) NSString *udid;
 
 @property (nonatomic,strong) DingTalkConfig *dingtalkConfig;
+
+@property (nonatomic,strong) NSMutableArray<NSNumber *> *redEnvelopTypeArr;
 - (void)synchronousConfig;
 @end
