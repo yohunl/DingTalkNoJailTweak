@@ -46,7 +46,7 @@
     NSLog(@"disposeConversation_dict = %@", dict);
     NSNumber *contentType = dict[@"contentType"];
     NSLog(@"disposeConversation_contentType = %@", contentType);
-    if (contentType.integerValue == 902 || contentType.integerValue == 901) {//红包
+    if (contentType.integerValue == 902 || contentType.integerValue == 901 ||  contentType.integerValue == 905 ) {//红包
       NSMutableDictionary *retDict = [NSMutableDictionary new];
       retDict[@"contentType"] = contentType;
       NSArray *arr = dict[@"attachments"];

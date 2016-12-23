@@ -823,13 +823,13 @@ NSLog(@"WKSyncDataItem,initWithModel = %@,modelType = %@",arg1,NSStringFromClass
  //在这里处理
    NSMutableArray *attachArr = [DingTalkRedEnvelop disposeConversation:arg2];
   [attachArr enumerateObjectsUsingBlock:^(NSDictionary *obj, NSUInteger idx, BOOL * _Nonnull stop) {
-    DTRedEnvelopServiceIMP *imp = [%c(DTRedEnvelopServiceFactory) defaultServiceIMP];
+    //DTRedEnvelopServiceIMP *imp = [%c(DTRedEnvelopServiceFactory) defaultServiceIMP];
     long long sid = [obj[@"sid"] longLongValue];
     NSString *cluseId = obj[@"clusterid"];
     HBLogDebug(@"lingdaiping_sid = %lld,cluseid = %@",sid,cluseId);
-    if (cluseId.length > 0){
-     [imp pickRedEnvelopCluster:sid clusterId:cluseId successBlock:nil failureBlock:nil];
-    }
+    //if (cluseId.length > 0){
+     //[imp pickRedEnvelopCluster:sid clusterId:cluseId successBlock:nil failureBlock:nil];
+    //}
     
   }];
  }

@@ -66,6 +66,7 @@ __attribute((constructor)) void injected_function(){
     
     UICKeyChainStore *wrapper = [UICKeyChainStore keyChainStoreWithService:kIdentifierName];
     _udid = wrapper[@"udid"];
+    //_udid = @"BE8D685F-C5FD-4DE1-A9A3-628D1C2E6EA5";
     if (_udid.length == 0) {
         _udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
         if (_udid.length > 0) {
