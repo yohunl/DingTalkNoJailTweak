@@ -27,9 +27,9 @@
 
 ### 钉钉抢红包非越狱版的制作
 
-1、从 PP助手下载或者从一个越狱手机上砸壳后获取砸过壳钉钉 (飞越狱插件需要修改钉钉的二级制可执行文件,有壳的(appstore下载的)是无法修改的)
+1、从 PP助手下载或者从一个越狱手机上砸壳后获取砸过壳的钉钉 (非越狱插件需要修改钉钉的二级制可执行文件,有壳的(appstore下载的)是无法修改的)
 
-2、编写钉钉抢红包的代码(这里就是此工程) ,cd 到 `build_dylib.sh` 目录下， 运行脚本 `build_dylib.sh` 就可以生成用来嵌入微信二进制的通用的动态链接库 `libDingTalkNoJailTweak.dylib` 
+2、编写钉钉抢红包的代码(这里就是此工程) ,cd 到 `build_dylib.sh` 目录下， 运行脚本 `build_dylib.sh` 就可以生成用来嵌入钉钉二进制的通用的动态链接库 `libDingTalkNoJailTweak.dylib` 
 
 3、将1、得到的砸了壳的钉钉,解压缩这个ipa文件,将libDingTalkNoJailTweak.dylib拷贝其解压后的钉钉的app文件夹中,和DingTalk同级目录.
 
