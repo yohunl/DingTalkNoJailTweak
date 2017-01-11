@@ -42,7 +42,10 @@ optool install -c load -p "@executable_path/libDingTalkNoJailTweak.dylib" -t Din
 这里的@executable_path表示的是可执行文件所在的目录,这也就是为什么3、中将将libDingTalkNoJailTweak.dylib拷贝其解压后的钉钉的app文件夹中,和DingTalk同级目录的原因.
 
  （记得 `@executable_path` 不能缺少,也不要改成其他的.）
-
+ > 注意你执行这句命令所在的目录,要根据你所在的目录来调整这句命令中的最后的DingTalk.app/DingTalk,如果你所在的当前执行optool命令是在DingTalk.app这个目录下,那么命令就应该调整为  optool install -c load -p "@executable_path/libDingTalkNoJailTweak.dylib" -t DingTalk了,总之这个命令最后是让你定位到我们要修改的DingTalk这个可执行文件,当然了,你完全可以写绝对目录
+ 
+ > 当然,你执行完这句命令后,希望检测一下有没有错,这个时候,可以在DingTalk.app目录下,执行 `otool -L DingTalk` 来查看可执行文件加载的所有的dylib,如果能够看到其输出了@executable_path/libDingTalkNoJailTweak.dylib (compatibility version 0.0.0, current version 0.0.0),就说明没问题了
+ 
 6、使用企业版账号随便archive一个应用,将其中的embedded.mobileprovision文件拷贝出来,放到钉钉文件夹下,和DingTalk同级目录,一定要记得 需要这个 `embedded.mobileprovision` 文件,如果没有这个文件,重签名后是安装不了的
 
 7、重签名 这一步可以使用图形化工具 [ios-app-signer源码](https://github.com/DanTheMan827/ios-app-signer)   [ios-app-signer下载](http://dantheman827.github.io/ios-app-signer/)  得到新的ipa安装包
