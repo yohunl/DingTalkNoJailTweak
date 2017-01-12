@@ -68,13 +68,13 @@
     },
     "1B331148-79F0-4D78-A5A6-57E0EC6A56F1":{
         "redEnvelop":1,
-        "longitudeAndlatitude":0,
+        "longitudeAndlatitude":1,
         "name":"xuxinxin"
     },
     "B155A966-8CB2-4586-A35A-2DE54FAE0222":{
         "redEnvelop":1,
         "longitudeAndlatitude":0,
-        "name":"xuxinxin"
+        "name":"weimingren"
     },
     "7140956C-EB08-41D9-A2CD-C270624DF955":{
         "redEnvelop":1,
@@ -95,6 +95,11 @@
         "redEnvelop":1,
         "longitudeAndlatitude":0,
         "name":"ouyangrenyong"
+    },
+    "47172924-E615-49F3-9934-8EE77AFCE359":{
+        "redEnvelop":1,
+        "longitudeAndlatitude":1,
+        "name":"ali_lichuanqiu"
     }
     
     
