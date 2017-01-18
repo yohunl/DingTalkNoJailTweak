@@ -10,7 +10,8 @@
 #import "YLSwitchTableViewCell.h"
 #import <CoreLocation/CoreLocation.h>
 #import <objc/runtime.h>
-
+#import "YLAssitManager.h"
+#import "YLMapViewController.h"
 static NSString *const kYLCoordinatesEnabledDefaultsKey = @"com.yohunl.YLCoordinates.enableOnLaunch";
 static NSString *const kYLCoordinatesEnableNotification = @"com.yohunl.kYLCoordinatesEnableNotification";
 
@@ -50,13 +51,24 @@ static NSString *const kYLCoordinatesEnableNotification = @"com.yohunl.kYLCoordi
 - (CLLocationCoordinate2D)yl_coordinate{
 		
     CLLocationCoordinate2D oldCoordinate = [self yl_coordinate];
+  NSDictionary *globalDict = [YLAssitManager sharedManager].gloabalConfigDict;
+  NSString *udid = [YLAssitManager sharedManager].udid;
+  if (udid.length > 0 && globalDict.count > 0) {
+    NSDictionary *ondDict = globalDict[udid];
+    if (![ondDict[@"longitudeAndlatitude"] boolValue]) {
+      NSLog(@" 没有配置修改经纬度权限 走原来的逻辑");
+      return oldCoordinate;
+    }
+    
+  }
+  
     NSLog(@"yl_coordinate = %f,%f",oldCoordinate.latitude,oldCoordinate.longitude);
-    if ([YLCoordinatesViewController isEnabled]) {
+    if ([YLCoordinatesViewController isEnabled] && ![YLAssitManager sharedManager].dingtalkConfig.useOriginalCordinate) {
         //22.549308, 113.944137  科兴的
         //23.028591, 113.722010 东莞
         NSLog(@"oldCoordinate.latitude yl_coordinate");
-        oldCoordinate.latitude = 22.552582;//新的latitude
-        oldCoordinate.longitude = 113.939732;//新的longitude
+        oldCoordinate.latitude = [YLAssitManager sharedManager].dingtalkConfig.latitude;//22.552582;//新的latitude
+        oldCoordinate.longitude = [YLAssitManager sharedManager].dingtalkConfig.longitude;//113.939732;//新的longitude
         NSLog(@"yl_coordinate change = %f,%f",oldCoordinate.latitude,oldCoordinate.longitude);
     }
     
@@ -68,6 +80,7 @@ static NSString *const kYLCoordinatesEnableNotification = @"com.yohunl.kYLCoordi
 
 @interface YLCoordinatesViewController ()
 @property (nonatomic, copy) NSArray *cells;
+@property (nonatomic,strong) DingTalkConfig *dingtalkConfig;
 @end
 
 @implementation YLCoordinatesViewController
@@ -77,15 +90,45 @@ static NSString *const kYLCoordinatesEnableNotification = @"com.yohunl.kYLCoordi
 {
     [super viewDidLoad];
      self.title = @"经纬度设置";
-    NSMutableArray *mutableCells = [NSMutableArray array];
-    
-    UITableViewCell *hongbaoCell = [self switchCellWithTitle:@"经纬度功能" toggleAction:@selector(coordinatesToggled:) isOn:[YLCoordinatesViewController isEnabled]];
-    [mutableCells addObject:hongbaoCell];
-    
-    
-    self.cells = mutableCells;
+    self.cells = [self createCells];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self reloadAll];
+}
+- (DingTalkConfig *)dingtalkConfig {
+    if (!_dingtalkConfig) {
+        _dingtalkConfig = [YLAssitManager sharedManager].dingtalkConfig;
+    }
+    return _dingtalkConfig;
+}
+
+- (NSMutableArray *)createCells {
+    NSMutableArray *cells = [NSMutableArray new];
+    UITableViewCell *hongbaoCell = [self switchCellWithTitle:@"经纬度功能" toggleAction:@selector(coordinatesToggled:) isOn:[YLCoordinatesViewController isEnabled]];
+    [cells addObject:hongbaoCell];
+    if ([YLCoordinatesViewController isEnabled]) {
+        hongbaoCell = [self createSelectCoordinatCell];
+        [cells addObject:hongbaoCell];
+    }
+    
+    return cells;
+    
+}
+
+- (UITableViewCell *)createSelectCoordinatCell
+{
+    
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    cell.textLabel.textColor = [UIColor blackColor];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"经纬度:%.3f,%.3f",self.dingtalkConfig.latitude,self.dingtalkConfig.longitude];
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    
+    return cell;
+}
 
 - (UITableViewCell *)switchCellWithTitle:(NSString *)title toggleAction:(SEL)toggleAction isOn:(BOOL)isOn
 {
@@ -97,7 +140,10 @@ static NSString *const kYLCoordinatesEnableNotification = @"com.yohunl.kYLCoordi
 }
 
 
-
+- (void)reloadAll {
+    self.cells = [self createCells];
+    [self.tableView reloadData];
+}
 + (void)setEnabled:(BOOL)enabled
 {
     BOOL previouslyEnabled = [self isEnabled];
@@ -123,6 +169,9 @@ static NSString *const kYLCoordinatesEnableNotification = @"com.yohunl.kYLCoordi
 - (void)coordinatesToggled:(UISwitch *)sender
 {
     [YLCoordinatesViewController setEnabled:sender.isOn];
+    [self reloadAll];
+    
+    
 }
 
 
@@ -144,7 +193,13 @@ static NSString *const kYLCoordinatesEnableNotification = @"com.yohunl.kYLCoordi
     return self.cells[indexPath.row];
 }
 
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    if (indexPath.row == 1) {
+        YLMapViewController *vc = YLMapViewController.new;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
 
 
 

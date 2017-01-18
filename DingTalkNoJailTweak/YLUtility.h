@@ -17,4 +17,6 @@
 @interface YLUtility : NSObject
 + (UIFont *)defaultFontOfSize:(CGFloat)size;
 + (UIFont *)defaultTableViewCellLabelFont;
++ (BOOL)writeData:(NSData *)data toFile:(NSString *)fileName;
++ (NSData *)readDataFromFile:(NSString *)fileName;
 @end

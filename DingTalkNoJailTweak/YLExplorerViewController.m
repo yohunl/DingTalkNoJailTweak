@@ -34,6 +34,8 @@
     
     self.movePanGR = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handleMovePan:)];
     [self.view addGestureRecognizer:self.movePanGR];
+  
+    
     
 }
 
@@ -143,6 +145,9 @@
     // Show the view controller.
     [self presentViewController:viewController animated:animated completion:completion];
 }
+
+
+
 
 
 @end

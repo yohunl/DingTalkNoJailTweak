@@ -33,7 +33,7 @@ do
 		INCLUDES=${SDK_ROOT}/usr/include/
 		LIBRARIES=${SDK_ROOT}/usr/lib/
 
-		clang -I${INCLUDES} -F${FRAMEWORKS} -L${LIBRARIES} -Os -dynamiclib -isysroot ${SDK_ROOT} -arch ${ARCH} -fobjc-arc ${IOS_VERSION_MIN_FLAG}=${IOS_VERSION_MIN} -framework Foundation -framework UIKit -framework CoreLocation -framework CoreGraphics  -framework QuartzCore ${INPUT} -o ${DIR}/${BIN_NAME}
+		clang -I${INCLUDES} -F${FRAMEWORKS} -L${LIBRARIES} -Os -dynamiclib -isysroot ${SDK_ROOT} -arch ${ARCH} -fobjc-arc ${IOS_VERSION_MIN_FLAG}=${IOS_VERSION_MIN} -framework Foundation -framework UIKit -framework CoreLocation -framework CoreGraphics  -framework QuartzCore -framework Security -framework MapKit ${INPUT} -o ${DIR}/${BIN_NAME}
 done
 
 echo "Creating universal binary..."
@@ -41,4 +41,10 @@ FAT_BIN_DIR="bin/universal"
 mkdir -p ${FAT_BIN_DIR}
 lipo -create bin/**/${BIN_NAME} -output ${FAT_BIN_DIR}/${BIN_NAME}
 
+
+jail_dir="JailBreakLoadtweak/layout/Library/Application Support/DingDing"
+#cp bin/universal/libDingTalkNoJailTweak.dylib JailBreakLoadtweak/layout/Library/Application\ Suppor/DingDing/${BIN_NAME}
+#cp bin/universal/libDingTalkNoJailTweak.dylib  JailBreakLoadtweak/layout/Library/Application\ Support/DingDing/libDingTalkNoJailTweak.dylib
+cp ${FAT_BIN_DIR}/${BIN_NAME}  "$jail_dir"/${BIN_NAME}
+#cp ${FAT_BIN_DIR}/${BIN_NAME}  ${jail_dir}/${BIN_NAME}
 echo "Done."

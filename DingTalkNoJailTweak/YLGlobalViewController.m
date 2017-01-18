@@ -9,8 +9,12 @@
 #import "YLGlobalViewController.h"
 #import "YLHongBaoViewController.h"
 #import "YLCoordinatesViewController.h"
+#import "YLAssitManager.h"
+#import "YLCellModel.h"
+#import "UIView+Helpers.h"
 @interface YLGlobalViewController ()
-@property (nonatomic,strong) NSMutableArray *datas;
+@property (nonatomic,strong) NSMutableArray<YLCellModel *> *cellModelArr;
+@property (nonatomic,strong) UITextField *tableFootView;
 @end
 @implementation YLGlobalViewController
 - (id)initWithStyle:(UITableViewStyle)style
@@ -29,7 +33,35 @@
     [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"JJRClientBaseViewID"];
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(donePressed:)];
+  _cellModelArr = [NSMutableArray new];
+  NSDictionary *dataDict ;
+  YLCellModel *model ;
+  
+  NSDictionary *globalDict = [YLAssitManager sharedManager].gloabalConfigDict;
+  NSString *udid = [YLAssitManager sharedManager].udid;
+  if (udid.length > 0 && globalDict.count > 0) {
+    NSDictionary *ondDict = globalDict[udid];
     
+    if ([ondDict[@"redEnvelop"] boolValue]) {
+      dataDict = @{@"data":@"红包配置",@"selector":@"enterHongBaoAction"};
+      model = [YLCellModel modelFromClass:UITableViewCell.class data:dataDict delegate:nil height:44];
+      [_cellModelArr addObject:model];
+    }
+    
+    if ([ondDict[@"longitudeAndlatitude"] boolValue]) {
+      dataDict = @{@"data":@"经纬度配置",@"selector":@"enterLatitudeAction"};
+      model = [YLCellModel modelFromClass:UITableViewCell.class data:dataDict delegate:nil height:44];
+      [_cellModelArr addObject:model];
+    }
+    
+  }
+    
+    _tableFootView = [UITextField new];
+    _tableFootView.textColor = [UIColor redColor];
+    _tableFootView.font = [UIFont systemFontOfSize:13];
+    _tableFootView.frameSize = CGSizeMake(self.tableView.frameSizeWidth, 44);
+    _tableFootView.text = udid;
+    self.tableView.tableFooterView = _tableFootView;
     
     
 }
@@ -48,29 +80,21 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return 1;
+  return _cellModelArr.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"JJRClientBaseViewID" forIndexPath:indexPath];
-    //cell.textLabel.text = [NSString stringWithFormat:@"index = %@",indexPath ];
-    if (indexPath.row == 0) {
-        cell.textLabel.text = @"红包";
-    }
-    else if (indexPath.row == 1) {
-        cell.textLabel.text = @"经纬度";
-    }
+  NSDictionary *data = _cellModelArr[indexPath.row].data;
+  cell.textLabel.text = data[@"data"];
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row == 0) {
-        [self enterHongBaoAction];
-    }
-    else if (indexPath.row == 1) {
-        [self enterLatitudeAction];
-    }
+  NSDictionary *data = _cellModelArr[indexPath.row].data;
+  SEL slector = NSSelectorFromString(data[@"selector"]);
+  [self performSelector:slector];
+    
 }
 
 + (void)setApplicationWindow:(UIWindow *)applicationWindow

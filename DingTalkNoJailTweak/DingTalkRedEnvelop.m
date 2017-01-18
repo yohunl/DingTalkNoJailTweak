@@ -8,6 +8,7 @@
 
 #import "DingTalkRedEnvelop.h"
 #import "DingTalkHead.h"
+#import "YLAssitManager.h"
 /*
  {
  "contentType" : 901,
@@ -31,9 +32,63 @@
  }
  ]
  }
+ 
+ "contentType" : 905,
+ "@Type" : "WKIDLContentModel",
+ "attachments" : [
+ {
+ "isPreload" : false,
+ "@Type" : "WKIDLAttachmentModel",
+ "size" : 0,
+ "type" : 905,
+ "extension" : {
+ "amount" : "0.88",
+ "clusterid" : "8Wgs7WF9",
+ "p_name" : "圣诞红包",
+ "p_mediaId" : "@lA_OlIjCfc47tmQkzgQzyLg",
+ "bg_mediaId" : "@lALOlGDyZ80B780Bdw",
+ "type" : "0",
+ "size" : "3",
+ "theme_id" : "1",
+ "oid" : "0",
+ "sid" : "45049990",
+ "congrats" : "圣诞快乐，预祝元旦快乐，顺便拜个早年",
+ "receivers" : "null"
+ },
+ "url" : "url"
+ }
+ ]
+	}
+ 
 */
+@interface DingTalkRedEnvelop ()
+
+@end
 @implementation DingTalkRedEnvelop
++ (instancetype)sharedInstance
+{
+    static DingTalkRedEnvelop *sharedInstance = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedInstance = [[[self class] alloc] init];
+    });
+    return sharedInstance;
+}
+
+//红包有很多类型,我们需要判断这种类型我们可以不可以抢,目前已知有 901,902,905 是节日红包
++ (BOOL)canDisposeRedenvelopType:(NSInteger) type {
+    __block BOOL canDisposeFlag = NO;
+    NSMutableArray<NSNumber *> * redEnvelopTypeArr = [YLAssitManager sharedManager].redEnvelopTypeArr;
+    [redEnvelopTypeArr enumerateObjectsUsingBlock:^(NSNumber * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (type == obj.integerValue) {
+            canDisposeFlag = YES;
+            *stop = YES;
+        }
+    }];
+    return canDisposeFlag;
+}
 + (NSMutableArray *)disposeConversation:(WKBizConversation *)converdation {
+    
   NSLog(@"disposeConversation_sation = %@", converdation);
     //WKBizConversation *converdation = sation;
   NSMutableArray *retArr = [NSMutableArray new];
@@ -46,7 +101,7 @@
     NSLog(@"disposeConversation_dict = %@", dict);
     NSNumber *contentType = dict[@"contentType"];
     NSLog(@"disposeConversation_contentType = %@", contentType);
-    if (contentType.integerValue == 902 || contentType.integerValue == 901) {//红包
+    if ([self canDisposeRedenvelopType:contentType.integerValue] ) {//红包
       NSMutableDictionary *retDict = [NSMutableDictionary new];
       retDict[@"contentType"] = contentType;
       NSArray *arr = dict[@"attachments"];

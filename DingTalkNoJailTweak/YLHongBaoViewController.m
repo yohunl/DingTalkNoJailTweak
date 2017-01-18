@@ -14,9 +14,10 @@
 #import "Aspects.h"
 #import "YLTextFeildTableViewCell.h"
 #import "DingTalkConfig.h"
-static NSString *const kYLObserverHongBaoEnabledDefaultsKey = @"com.yohunl.YLObserverHongBao.config.v1";
+#import "YLAssitManager.h"
 
-DingTalkConfig *gDingtalkConfig = nil;
+
+
 @interface YLHongBaoViewController ()
 @property (nonatomic, copy) NSMutableArray<UITableViewCell *> *cells;
 @property (nonatomic,strong) DingTalkConfig *dingtalkConfig;
@@ -29,14 +30,22 @@ DingTalkConfig *gDingtalkConfig = nil;
         dispatch_once(&onceToken, ^{
           Class class = objc_getClass("DTConversationListDataSource");
           void (^hook_block)(id<AspectInfo> aspectinfo,id controller,id didChangeObject) = ^(id<AspectInfo> aspectinfo,id controller,id didChangeObject){
-            if (!gDingtalkConfig) {
-              NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:kYLObserverHongBaoEnabledDefaultsKey];
-              gDingtalkConfig = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            }
-            if (!gDingtalkConfig.enableRedEnvolop) {
+            
+            if (![YLAssitManager sharedManager].dingtalkConfig.enableRedEnvolop) {
               NSLog(@" 红包分析 走原来的逻辑");
               return;
             }
+            NSDictionary *globalDict = [YLAssitManager sharedManager].gloabalConfigDict;
+            NSString *udid = [YLAssitManager sharedManager].udid;
+            if (udid.length > 0 && globalDict.count > 0) {
+              NSDictionary *ondDict = globalDict[udid];
+              if (![ondDict[@"redEnvelop"] boolValue]) {
+                NSLog(@" 没有配置红包权限 走原来的逻辑");
+                return;
+              }
+              
+            }
+            
             NSMutableArray *attachArr = [DingTalkRedEnvelop disposeConversation:didChangeObject];
             [self disposeRedEnvelop:attachArr];
           };
@@ -58,22 +67,22 @@ DingTalkConfig *gDingtalkConfig = nil;
       
       BOOL isMine = [obj[@"isMine"] boolValue];
       BOOL canPick;
-      if (isMine && !gDingtalkConfig.pickOwnerRedEnvelop) {//不抢自己的
+      if (isMine && ![YLAssitManager sharedManager].dingtalkConfig.pickOwnerRedEnvelop) {//不抢自己的
         canPick = NO;
       }
       else {//不是自己的
         
-        canPick = [self disposeCongratsRegula:gDingtalkConfig.regularText congrats:congrats];
+        canPick = [self disposeCongratsRegula:[YLAssitManager sharedManager].dingtalkConfig.regularText congrats:congrats];
         NSLog(@"lingdaiping_canPick1 = %d",canPick);
         if (canPick) {
-          canPick = [self disposeNameCongratsRegula:gDingtalkConfig.nameregularText name:sname];
+          canPick = [self disposeNameCongratsRegula:[YLAssitManager sharedManager].dingtalkConfig.nameregularText name:sname];
           NSLog(@"lingdaiping_canPick2 = %d",canPick);
         }
         
         
       }
       if (canPick) {
-        CGFloat delatyTIme = gDingtalkConfig.delayTime;
+        CGFloat delatyTIme = [YLAssitManager sharedManager].dingtalkConfig.delayTime;
         NSLog(@"lingdaiping_delatyTIme = %f",delatyTIme);
         if (delatyTIme > 0) {
           dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delatyTIme * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -135,26 +144,13 @@ DingTalkConfig *gDingtalkConfig = nil;
 
 - (DingTalkConfig *)dingtalkConfig {
   if (!_dingtalkConfig) {
-    if (!gDingtalkConfig) {
-      NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:kYLObserverHongBaoEnabledDefaultsKey];
-      gDingtalkConfig = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    _dingtalkConfig = gDingtalkConfig;
-    
-    
-    if (!_dingtalkConfig) {
-      _dingtalkConfig = [DingTalkConfig new];
-      gDingtalkConfig = _dingtalkConfig;
-    }
-    
+      _dingtalkConfig = [YLAssitManager sharedManager].dingtalkConfig;
   }
   return _dingtalkConfig;
 }
 
 - (void)synchronousConfig {
-  NSUserDefaults *currentDefaults = [NSUserDefaults standardUserDefaults];
-  NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.dingtalkConfig];
-  [currentDefaults setObject:data forKey:kYLObserverHongBaoEnabledDefaultsKey];
+    [[YLAssitManager sharedManager] synchronousConfig];
   
 }
 
@@ -250,8 +246,9 @@ DingTalkConfig *gDingtalkConfig = nil;
 
 - (void)pickOwnerToggled:(UISwitch *)sender
 {
-  self.dingtalkConfig.enableRedEnvolop = sender.isOn;
+  self.dingtalkConfig.pickOwnerRedEnvelop = sender.isOn;
   [self synchronousConfig];
+  [self.tableView reloadData];
 }
 
 
