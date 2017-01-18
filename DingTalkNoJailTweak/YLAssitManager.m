@@ -57,6 +57,21 @@ __attribute((constructor)) void injected_function(){
     //  udid在非越狱手机上,没有权限,所以只能使用其它方式
     
     
+
+    
+    UICKeyChainStore *wrapper = [UICKeyChainStore keyChainStoreWithService:kIdentifierName];
+    _udid = wrapper[@"udid"];
+    //_udid = @"BE8D685F-C5FD-4DE1-A9A3-628D1C2E6EA5";
+    if (_udid.length == 0) {
+        _udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
+        if (_udid.length > 0) {
+            wrapper[@"udid"] = _udid;
+        }
+        
+    }
+    
+    
+#if 0
     NSError *error = nil;
     NSData *data = [YLUtility readDataFromFile:kConfigDataFileName];
     if (data) {
@@ -72,17 +87,28 @@ __attribute((constructor)) void injected_function(){
             
         }
     }
-    
-    UICKeyChainStore *wrapper = [UICKeyChainStore keyChainStoreWithService:kIdentifierName];
-    _udid = wrapper[@"udid"];
-    //_udid = @"BE8D685F-C5FD-4DE1-A9A3-628D1C2E6EA5";
-    if (_udid.length == 0) {
-        _udid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
-        if (_udid.length > 0) {
-            wrapper[@"udid"] = _udid;
-        }
+#else
+    if (_udid.length > 0) {
+        NSMutableDictionary *dict = [NSMutableDictionary new];
+        NSMutableDictionary *rightDcit = [NSMutableDictionary new];
+        rightDcit[@"redEnvelop"] = @1;
+        rightDcit[@"longitudeAndlatitude"] = @1;
+      
         
+        dict[_udid] = rightDcit;
+        _gloabalConfigDict = dict;
+        if (_gloabalConfigDict) {
+            NSArray *arr = _gloabalConfigDict[@"redEnvelopType"];
+            if (arr.count > 0) {
+                _redEnvelopTypeArr = [NSMutableArray new];
+                [_redEnvelopTypeArr addObjectsFromArray:arr];
+            }
+            
+            
+        }
     }
+    
+#endif
     
     if (_redEnvelopTypeArr || _redEnvelopTypeArr.count == 0) {
         _redEnvelopTypeArr = [NSMutableArray new];
