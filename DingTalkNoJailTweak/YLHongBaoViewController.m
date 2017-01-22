@@ -85,7 +85,9 @@
         CGFloat delatyTIme = [YLAssitManager sharedManager].dingtalkConfig.delayTime;
         NSLog(@"lingdaiping_delatyTIme = %f",delatyTIme);
         if (delatyTIme > 0) {
-          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delatyTIme * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            uint32_t cout = arc4random() % 100;
+            CGFloat delayTime = cout / 100.0 * delatyTIme;
+          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayTime * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [imp pickRedEnvelopCluster:sid clusterId:cluseId successBlock:nil failureBlock:nil];
           });
         }
@@ -159,7 +161,7 @@
 - (YLTextFeildTableViewCell *)createDelayCell {
   YLTextFeildTableViewCell *cell = [YLTextFeildTableViewCell new];
   NSString *strValue = [NSString stringWithFormat:@"%.3f",self.dingtalkConfig.delayTime];
-  [cell setTitle:@"延迟多少秒" feildText:strValue];
+  [cell setTitle:@"随机延迟最大秒数" feildText:strValue];
   cell.textField.keyboardType = UIKeyboardTypeNumberPad;
   [cell.textField addTarget:self action:@selector(delayCellFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
   return cell;
