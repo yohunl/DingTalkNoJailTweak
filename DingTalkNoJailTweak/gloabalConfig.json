@@ -121,11 +121,27 @@
         "longitudeAndlatitude":1,
         "name":"yohunl_4s"
     },
+    "74A61492-828A-43CA-97D5-1940C9859B1A":{
+        "redEnvelop":1,
+        "longitudeAndlatitude":0,
+        "name":"yuanqiang_2"
+    },
+    "B8FB6371-309D-4B8D-ACC1-63D5E9BE0619":{
+        "redEnvelop":1,
+        "longitudeAndlatitude":0,
+        "name":"zhangweihua"
+    }, 
+    "ED75113F-A965-4459-A68B-01BBA719694A":{
+        "redEnvelop":1,
+        "longitudeAndlatitude":0,
+        "name":"Liuxiaolong2"
+    },
     "F942E447-5C79-494B-88A7-30095515E614":{
         "redEnvelop":1,
         "longitudeAndlatitude":1,
         "name":"chengjiaming"
     }
+    
     
     
     
