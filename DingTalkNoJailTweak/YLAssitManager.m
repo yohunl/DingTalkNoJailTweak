@@ -71,7 +71,7 @@ __attribute((constructor)) void injected_function(){
     }
     
     
-#if 1
+#if 0
     NSError *error = nil;
     NSData *data = [YLUtility readDataFromFile:kConfigDataFileName];
     if (data) {
